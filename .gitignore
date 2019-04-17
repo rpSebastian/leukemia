@@ -8,3 +8,5 @@ data/label/
 *.ckpt
 
 data/leukemia\.zip
+
+result/
