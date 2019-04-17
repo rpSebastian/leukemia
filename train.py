@@ -84,6 +84,9 @@ def eval():
     return total_loss, total_dice
 
 ### train model
+if args.checkpoint and os.path.exists(params_file):
+    model.load_state_dict(torch.load(params_file))
+    logger.write("continue training!")
 for epoch in range(args["num_epochs"]):
     train_loss, train_dice = train()
     eval_loss, eval_dice = eval()

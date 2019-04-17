@@ -9,7 +9,7 @@ class CellDataset(torch.utils.data.Dataset):
         self.label_path = []
         self.size = size
         num = 81
-        sequence = np.random.permutation(num)
+        sequence = np.arange(num)
         sequence = sequence[:int(num* 0.8)] if train else sequence[int(num*0.8):num]
         
         for i in sequence:
