@@ -6,3 +6,5 @@ data/label/
 *.pyc
 
 *.ckpt
+
+data/leukemia\.zip
