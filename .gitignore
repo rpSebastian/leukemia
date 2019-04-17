@@ -1,0 +1,8 @@
+
+data/image/
+
+data/label/
+
+*.pyc
+
+*.ckpt

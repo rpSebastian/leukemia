@@ -1,0 +1,8 @@
+num_epochs: 100
+batch_size: 1
+learning_rate: 0.001
+weight_decay: 0.0005
+device: gpu
+checkpoint: true
+model: unet
+params: "params/params.ckpt"
