@@ -26,11 +26,15 @@ model = model().to(device)
 model.load_state_dict(torch.load(params_file))
 model.eval()
 
+total_mIoU = 0
 for i, (inputs, targets) in enumerate(eval_loader):
     inputs = inputs.to(device)
     targets = targets.to(device)
     outputs = model(inputs)
     _, preds = torch.max(outputs, 1)
     mIoU = calc_mIoU(outputs, targets)
+    total_mIoU += mIoU
     logger.write("{}/{}, eval_mIoU: {:.4f}".format(i, len(eval_loader), mIoU))
     showSample(inputs, targets, preds)
+total_mIoU /= len(eval_dataset)
+logger.write("eval_mIoU: {:.4f}".format(total_mIoU))
