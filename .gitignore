@@ -11,6 +11,4 @@ data/leukemia\.zip
 
 result/
 
-logs/unet/log\.txt
-
-*.txt
+logs/
