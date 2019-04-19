@@ -2,7 +2,7 @@ import yaml
 import torch
 from data import CellDataset, showSample
 from torch.utils.data import DataLoader
-from utils import calc_dice, Logger, create_path, import_mod
+from utils import calc_mIoU, Logger, create_path, import_mod
 
 ### load hyper parameter
 with open("./config/config.yaml")as f:
@@ -14,7 +14,7 @@ with open("./config/config.yaml")as f:
 
     
 ### load eval dataset
-eval_dataset = CellDataset(train=False)
+eval_dataset = CellDataset(train=False, size=args["image_size"])
 eval_loader = DataLoader(dataset=eval_dataset, batch_size=args['batch_size'], shuffle=False)
 
 ### load device --- cpu or gpu
@@ -31,6 +31,6 @@ for i, (inputs, targets) in enumerate(eval_loader):
     targets = targets.to(device)
     outputs = model(inputs)
     _, preds = torch.max(outputs, 1)
-    dice = calc_dice(outputs, targets)
-    logger.write("{}/{}, eval_dice: {:.4f}".format(i, len(eval_loader), dice))
+    mIoU = calc_mIoU(outputs, targets)
+    logger.write("{}/{}, eval_mIoU: {:.4f}".format(i, len(eval_loader), mIoU))
     showSample(inputs, targets, preds)

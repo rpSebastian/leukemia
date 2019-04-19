@@ -1,19 +1,34 @@
 
-def calc_dice(outputs, targets):
+# def calc_dice(outputs, targets):
+#     import torch
+#     dice = 0
+#     _, outputs = torch.max(outputs, 1)
+#     batch_size = outputs.size(0)
+#     for i in range(batch_size):
+#         preds, labels = outputs[i], targets[i]
+#         A = (preds != 0).sum().item()
+#         B = (labels != 0).sum().item()
+#         C = ((preds == 1) & (labels == 1)).sum().item() + ((preds == 2) & (labels == 2)).sum().item()
+#         if (A + B == 0):
+#             dice += 1
+#         else:
+#             dice += 2 * C / (A + B)
+#     # print((labels == 0).sum().item(), (labels == 1).sum().item())
+#     # print((preds == 0).sum().item(), (preds == 1).sum().item())
+#     return dice
+def calc_mIoU(outputs, targets):
     import torch
-    dice = 0
+    IoU = 0
     _, outputs = torch.max(outputs, 1)
     batch_size = outputs.size(0)
     for i in range(batch_size):
         preds, labels = outputs[i], targets[i]
-        A = (preds != 0).sum().item()
-        B = (labels != 0).sum().item()
-        C = ((preds == 1) & (labels == 1)).sum().item() + ((preds == 2) & (labels == 2)).sum().item()
-        if (A + B == 0):
-            dice += 1
-        else:
-            dice += 2 * C / (A + B)
-    return dice
+        A = ((preds == 1) & (labels == 1)).sum().item()
+        B = ((preds == 1) & (labels == 0)).sum().item()
+        C = ((preds == 0) & (labels == 1)).sum().item()
+        # print(A, B, C)
+        IoU += A / (A + B + C)
+    return IoU
 
 def calc_params(model, logger=None):
     sum = 0
