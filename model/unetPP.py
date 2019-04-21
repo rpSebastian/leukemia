@@ -6,7 +6,7 @@ class UNetPP(torch.nn.Module):
     def __init__(self, in_channels = 3, num_classes = 2, num_layers = 4):
         super(UNetPP, self).__init__()
         self.num_layers = num_layers
-        features = [64, 128, 256, 512, 1024]
+        features = [32, 64, 128, 256, 512]
         self.maxpool = nn.MaxPool2d(kernel_size=2)
         
         self.conv00 = DoubleConv(3, features[0])

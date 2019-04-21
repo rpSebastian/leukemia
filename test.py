@@ -14,7 +14,7 @@ with open("./config/config.yaml")as f:
 
     
 ### load eval dataset
-eval_dataset = CellDataset(train=False, size=args["image_size"])
+eval_dataset = CellDataset(train=True, size=args["image_size"])
 eval_loader = DataLoader(dataset=eval_dataset, batch_size=args['batch_size'], shuffle=False)
 
 ### load device --- cpu or gpu

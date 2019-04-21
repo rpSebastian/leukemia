@@ -5,7 +5,7 @@ from .layers import DoubleConv, Up, Conv11
 class UNet(torch.nn.Module):
     def __init__(self, in_channels = 3, num_classes = 3):
         super(UNet, self).__init__()
-        features = [64, 128, 256, 512, 1024]
+        features = [32, 64, 128, 256, 512]
         self.conv1 = DoubleConv(in_channels, features[0])
         self.conv2 = DoubleConv(features[0], features[1])
         self.conv3 = DoubleConv(features[1], features[2])

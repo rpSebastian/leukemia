@@ -23,7 +23,7 @@ def loadColors():
     return colors
 
 
-def loadLabel(label_name, size):
+def loadLabel(label_name, length, width):
     """
         读取标签图片，转化为固定大小，再将每个像素的颜色值转化为距离最近的颜色索引值
     Args:
@@ -37,7 +37,7 @@ def loadLabel(label_name, size):
     colors = loadColors()
     label = Image.open(label_name)
     transform = transforms.Compose([
-                transforms.Scale((size, size))
+                transforms.Scale((length, width))
     ])
     label = transform(label)
     label = np.array(label) 
@@ -51,7 +51,7 @@ def loadLabel(label_name, size):
     label = torch.from_numpy(label)
     return label
 
-def loadImage(image_name, size):
+def loadImage(image_name, length, width):
     """
         读取细胞原图片， 转化为固定大小
     Args:
@@ -63,7 +63,7 @@ def loadImage(image_name, size):
     """
     image = Image.open(image_name)
     transform = transforms.Compose([
-                transforms.Scale((size, size)),
+                transforms.Scale((length, width)),
                 transforms.ToTensor()
     ])
     image = transform(image)
@@ -99,11 +99,12 @@ def showLabel(label):
     Args:
         label: 标签图片 torch, shape: size * size 
     """
-    size = label.shape[0]
+    length = label.shape[0]
+    width = label.shape[1]
     colors = loadColors()
-    image = np.empty((size, size, 3), dtype=int)
-    for i in range(size):
-        for j in range(size):
+    image = np.empty((length, width, 3), dtype=int)
+    for i in range(length):
+        for j in range(width):
             image[i][j] = colors[label[i][j]]
     plt.imshow(image)
     return image
