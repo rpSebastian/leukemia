@@ -30,8 +30,18 @@ class UNetPP(torch.nn.Module):
         self.up22 = Up(features[3], features[2], 2)
         self.up13 = Up(features[2], features[1], 3)
         self.up04 = Up(features[1], features[0], 4)
-        self.outconv4 = Conv11(features[0], num_classes)
-        
+        self.outconv4 = Conv11(features[0], num_classes)    
+        self.reset_params()
+    
+    def weight_init(self, m):
+        if isinstance(m, nn.Conv2d):
+            nn.init.kaiming_normal_(m.weight)
+            nn.init.constant_(m.bias, 0)
+
+    def reset_params(self):
+        for i, m in enumerate(self.modules()):
+            self.weight_init(m)
+
     def forward(self, x):
         out = 0
         if self.num_layers >= 1:

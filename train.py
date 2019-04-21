@@ -33,7 +33,7 @@ model = model().to(device)
 calc_params(model, logger)
 
 ### load criterion and assign weight
-weight = torch.tensor([0.01, 0.20]).to(device)
+weight = torch.tensor([0.01, 0.10]).to(device)
 criterion = CrossEntropyLoss(weight=weight)
 weight_p, bias_p = [],[]
 for name, p in model.named_parameters():
