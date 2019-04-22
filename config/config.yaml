@@ -4,6 +4,6 @@ learning_rate: 0.001
 weight_decay: 0
 # weight_decay: 0.0005
 device: gpu
-checkpoint: false
+checkpoint: true
 image_size: 128
 model: unet

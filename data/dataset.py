@@ -17,8 +17,8 @@ class CellDataset(torch.utils.data.Dataset):
             self.label_path.append("./data/label/" + str(i) + ".jpg")        
 
     def __getitem__(self, index):
-        image = loadImage(self.image_path[index], 128, 192)
-        label = loadLabel(self.label_path[index], 128, 192)
+        image = loadImage(self.image_path[index], self.size, self.size // 2 * 3)
+        label = loadLabel(self.label_path[index], self.size, self.size // 2 * 3)
         return image, label
         
     def __len__(self):

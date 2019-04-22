@@ -92,7 +92,7 @@ for epoch in range(args["num_epochs"]):
     train_loss, train_mIoU = train()
     eval_loss, eval_mIoU = eval()
     logger.write("Epoch[{}/{}], train_loss:{:.4f}, train_mIoU:{:.4f}, eval_loss:{:.4f}, eval_mIoU:{:.4f}"
-        .format(epoch, args["num_epochs"], train_loss, train_mIoU, eval_loss, eval_mIoU))
+        .format(epoch + 1, args["num_epochs"], train_loss, train_mIoU, eval_loss, eval_mIoU))
 
 
 
