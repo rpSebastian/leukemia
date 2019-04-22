@@ -37,7 +37,7 @@ def loadLabel(label_name, length, width):
     colors = loadColors()
     label = Image.open(label_name)
     transform = transforms.Compose([
-                transforms.Scale((length, width))
+                transforms.Resize((length, width))
     ])
     label = transform(label)
     label = np.array(label) 
@@ -63,7 +63,7 @@ def loadImage(image_name, length, width):
     """
     image = Image.open(image_name)
     transform = transforms.Compose([
-                transforms.Scale((length, width)),
+                transforms.Resize((length, width)),
                 transforms.ToTensor()
     ])
     image = transform(image)

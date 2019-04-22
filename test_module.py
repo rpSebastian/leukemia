@@ -45,5 +45,10 @@ def test_data():
         image.save(image_save_path)
         label.save(label_save_path)
 
+def test_dataset():
+    from data import CellDataset
+    image, label = CellDataset()[0]
+    print(image.shape, label.shape)
+
 if __name__ == "__main__":
-    test_unet()
+    test_dataset()
