@@ -3,7 +3,7 @@ batch_size: 1
 learning_rate: 0.001
 weight_decay: 0
 # weight_decay: 0.0005
-device: gpu
-checkpoint: true
+device: cpu
+checkpoint: false
 image_size: 128
-model: unet
+model: unetpp

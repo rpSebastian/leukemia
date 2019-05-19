@@ -50,5 +50,13 @@ def test_dataset():
     image, label = CellDataset()[0]
     print(image.shape, label.shape)
 
+def test_count():
+    import cv2
+    import matplotlib.pyplot as plt
+    img = cv2.imread("data/result/1.jpg")
+    from utils import count
+    print(count(img))
+
+
 if __name__ == "__main__":
-    test_dataset()
+    test_count()

@@ -24,7 +24,7 @@ device = torch.device('cuda:0') if args["device"]=="gpu" else torch.device('cpu'
 model = import_mod("model." + args["model"])
 model = model().to(device)
 model.load_state_dict(torch.load(params_file))
-model.eval()
+# model.eval()
 
 total_mIoU = 0
 for i, (inputs, targets) in enumerate(eval_loader):

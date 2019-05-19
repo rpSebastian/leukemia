@@ -1,2 +1,2 @@
 from .dataset import CellDataset
-from .preprocess import showSample
+from .preprocess import showSample, showLabel

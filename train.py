@@ -62,7 +62,9 @@ def train():
         loss.backward()
         optimizer.step()
         total_loss += loss.item()
-        total_mIoU += calc_mIoU(outputs, targets)
+        mIoU = calc_mIoU(outputs, targets)
+        total_mIoU += mIoU
+        
     pbar.finish()
     torch.save(model.state_dict(), params_file)
     total_loss /= len(train_loader)

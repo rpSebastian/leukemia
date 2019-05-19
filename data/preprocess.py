@@ -92,21 +92,23 @@ def showImage(image):
     image = transform(image)
     plt.imshow(image)
 
-def showLabel(label):
+def showLabel(label, show=True):
     """
         转化颜色索引， 将label以图片形式展示
     
     Args:
         label: 标签图片 torch, shape: size * size 
     """
+    label[label==255] =1
     length = label.shape[0]
     width = label.shape[1]
     colors = loadColors()
-    image = np.empty((length, width, 3), dtype=int)
+    image = np.empty((length, width, 3), dtype=np.uint8)
     for i in range(length):
         for j in range(width):
             image[i][j] = colors[label[i][j]]
-    plt.imshow(image)
+    if show:
+        plt.imshow(image)
     return image
 
 def showSample(image, label, pred):
@@ -128,6 +130,7 @@ def showSample(image, label, pred):
     showLabel(label)
     
     plt.subplot(224)
-    showLabel(pred)
+    pred = showLabel(pred)
     
     plt.show()
+    return pred
